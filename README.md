@@ -19,7 +19,7 @@ NOTICE: for option **B**2 to work you will need Go. For platform specific instru
 > and then `gomobile init`  
 > for more detailed instructions please see [here](https://godoc.org/golang.org/x/mobile/cmd/gomobile) and [here](https://github.com/golang/go/wiki/Mobile)
 
-Simply run `gomobile bind -o $GOPATH/src/github.com/BH90210/CP500/AndroidStudioProject/app/cpfiveoo.aar -target=android github.com/BH90210/CP500/cpfiveoo` and you should end up with two files (`cpfiveoo.aar` & `cpfiveoo.jar`) inside your `/app/` dir. You can safely delete the `.jar` file
+Simply run `gomobile bind -o $GOPATH/src/github.com/BH90210/CP500/AndroidStudioProject/app/cpfiveoo.aar -target=android github.com/BH90210/CP500/cpfiveoo` and you should end up with two files (`cpfiveoo.aar` & `cpfiveoo.jar`) inside your `/app/` dir. Afterwards you have to refresh Gradle. You can safely delete the `.jar` file
 
 TODO
 - [ ] Error handling
