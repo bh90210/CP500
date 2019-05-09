@@ -8,7 +8,7 @@ NOTICE: for option **B**2 to work you will need Go. For platform specific instru
   
 * **B** There are two options to procced depending on your situation
 
-1. Android Studio/Gradle option: run `git clone https://github.com/BH90210/CP500.git` from inside the directory you want your project to be. Then procced normally as you would since the dinfing is already pre-compiled and in place
+1. Android Studio/Gradle option: run `git clone https://github.com/BH90210/CP500.git` from inside the directory you want your project to be. Then procced normally as you would since the binding is already pre-compiled and in place
 
 2. Go option: run `go get github.com/BH90210/CP500` then procced building the app the way you prefer
 
