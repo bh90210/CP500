@@ -2,7 +2,7 @@
 Social media automation app for Android
 
 There are two ways acquiring the app. You can either **A** download a pre-built APK or **B** build from source localy.  
-NOTICE: If you would like to also compile the Go binding localy you have to choose option **B**2. For this to work you will need  Go. For platform specific instructions please see [here](https://golang.org/doc/install) 
+NOTICE: for option **B**2 to work you will need Go. For platform specific instructions please see [the official documentation](https://golang.org/doc/install) 
 
 * **A** You can download the latest release here
   
@@ -14,7 +14,7 @@ NOTICE: If you would like to also compile the Go binding localy you have to choo
 
 ## How to compile the Go binding
 
-> For this to work you will need Gomobile  
+> For this to work you will also need Gomobile  
 > To get it run `go get golang.org/x/mobile/cmd/gomobile`  
 > and then `gomobile init`  
 > for more detailed instructions please see [here](https://godoc.org/golang.org/x/mobile/cmd/gomobile) and [here](https://github.com/golang/go/wiki/Mobile)
