@@ -203,7 +203,6 @@ public class PhotoPost extends AppCompatActivity {
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 boolean aB = Boolean.parseBoolean(Cpfiveoo.dbView("fbCheckedMem"));
                 boolean bB = Boolean.parseBoolean(Cpfiveoo.dbView("twCheckedMem"));
                 boolean cB = Boolean.parseBoolean(Cpfiveoo.dbView("inCheckedMem"));
@@ -245,7 +244,7 @@ public class PhotoPost extends AppCompatActivity {
                                 TextInputEditText inHash = (TextInputEditText)findViewById(R.id.inHash);
                                 final String id = Cpfiveoo.schedule(String.valueOf(text.getText()), String.valueOf(twHash.getText()), String.valueOf(inHash.getText()), filePathHelper);
 
-                                Util.scheduleJob(getApplicationContext(), 5000, id);
+                                Util.scheduleJob(getApplicationContext(), 60000, id);
 
                                 Intent intent = new Intent(PhotoPost.this, ScrollingActivity.class);
                                 //intent.putExtra("alarm", id);

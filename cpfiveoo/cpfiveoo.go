@@ -20,19 +20,19 @@ import (
 
 var totalIdz = make(map[int]string)
 var db *badger.DB
+var dbOpenHelper string
 
-// OpenDB database lookup, takes a string (Key)
-func OpenDB(dir string) {
-		opts := badger.DefaultOptions // optimize for smartphones
-		opts.Dir = dir
-		opts.ValueDir = dir
-		badg, _ := badger.Open(opts)
-		db = badg
+// InitOpenDB open the database
+func InitDBdirHelper(dir string) {
+	dbOpenHelper = dir
 }
 
-// CloseDB database lookup, takes a string (Key)
-func CloseDB() {
-	db.Close()
+func openDB() {
+	opts := badger.DefaultOptions // optimize for smartphones
+	opts.Dir = dbOpenHelper
+	opts.ValueDir = dbOpenHelper
+	badg, _ := badger.Open(opts)
+	db = badg
 }
 
 func bytesToString(data []byte) string {
@@ -42,6 +42,9 @@ func bytesToString(data []byte) string {
 
 // DbView database lookup, takes a string (Key)
 func DbView(dbEntry string) string {
+	openDB()
+	defer db.Close()
+
 	var varDBentry []byte
 	// badger view entry function
 	db.View(func(txn *badger.Txn) error {
@@ -57,6 +60,9 @@ func DbView(dbEntry string) string {
 
 // DbUpdate writes to the database, takes string (key), string (value)
 func DbUpdate(dbEntry, value string) {
+	openDB()
+	defer db.Close()
+
 	db.Update(func(txn *badger.Txn) error {
 		err := txn.Set([]byte(dbEntry), []byte(value))
 		return err
@@ -66,6 +72,9 @@ func DbUpdate(dbEntry, value string) {
 // TotalScheduledPosts calculate total scheduled post nuber and return (int) result
 // to menu inflater for-loop
 func TotalScheduledPosts() int {
+	openDB()
+	defer db.Close()
+
 	var totalPostsNumber int
 
 	db.View(func(txn *badger.Txn) error { // abstract function for database query
@@ -116,6 +125,9 @@ func ScheduledPostUpload(receivedID string) {
 		instagramPhotoPost(text, inHash, filePath)
 	}
 
+	openDB()
+	defer db.Close()
+
 	db.Update(func(txn *badger.Txn) error {
 		txn.Delete([]byte("POST_" + receivedID + "_ID"))
 		txn.Delete([]byte(receivedID + "_TEXT"))
@@ -153,6 +165,9 @@ func ScheduledPostNow(receivedID string) {
 		instagramPhotoPost(text, inHash, filePath)
 	}
 
+	openDB()
+	defer db.Close()
+
 	db.Update(func(txn *badger.Txn) error {
 		txn.Delete([]byte("POST_" + receivedID + "_ID"))
 		txn.Delete([]byte(receivedID + "_TEXT"))
@@ -169,6 +184,9 @@ func ScheduledPostNow(receivedID string) {
 // DeletePost Package sort provides primitives for sorting slices and user-defined
 // collections.
 func DeletePost(receivedID string) {
+	openDB()
+	defer db.Close()
+
 	db.Update(func(txn *badger.Txn) error {
 		txn.Delete([]byte("POST_" + receivedID + "_ID"))
 		txn.Delete([]byte(receivedID + "_TEXT"))
@@ -188,6 +206,9 @@ func Schedule(text, twHash, inHash, filePath string) string {
 	fbDBentry := DbView("fbCheckedMem")
 	twDBentry := DbView("twCheckedMem")
 	inDBentry := DbView("inCheckedMem")
+
+	openDB()
+	defer db.Close()
 
 	db.Update(func(txn *badger.Txn) error {
 		seq, _ := db.GetSequence([]byte("IDZ"), 1000)

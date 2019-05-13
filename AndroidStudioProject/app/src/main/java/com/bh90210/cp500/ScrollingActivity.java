@@ -36,15 +36,13 @@ import java.io.InputStream;
 
 import cpfiveoo.Cpfiveoo;
 
-import static com.bh90210.cp500.R.layout.activity_scrolling;
-
 public class ScrollingActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = getApplicationContext();
-        Cpfiveoo.openDB(String.valueOf(context.getFilesDir())); // init the database passing the db dir
+        Cpfiveoo.initDBdirHelper(String.valueOf(context.getFilesDir())); // init the database passing the db dir
         createNotificationChannel();
         try {
             File file = new File(context.getFilesDir(), "MANIFEST");
@@ -86,7 +84,7 @@ public class ScrollingActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.
                 LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        setContentView(activity_scrolling);
+        setContentView(R.layout.activity_scrolling);
 
         setTitle("");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -250,11 +248,5 @@ public class ScrollingActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Cpfiveoo.closeDB();
     }
 }

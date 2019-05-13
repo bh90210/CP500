@@ -2,6 +2,7 @@ package com.bh90210.cp500;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.PersistableBundle;
@@ -23,6 +24,8 @@ public class TestJobService extends JobService {
 
         PersistableBundle pb=params.getExtras();
         String id = pb.getString("id");
+        Context context = getApplicationContext();
+        Cpfiveoo.initDBdirHelper(String.valueOf(context.getFilesDir())); // init the database passing the db dir
         Cpfiveoo.scheduledPostUpload(id);
         showNotification();
         //Util.scheduleJob(getApplicationContext()); // reschedule the job
