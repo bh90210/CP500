@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tableraw"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_margin="16dp"
+    android:layout_marginBottom="20dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/schePre"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text="5.64h"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="normal|italic" />
+
+            <Button
+                android:id="@+id/pn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Post Now"
+                android:textColor="@color/colorPrimary"
+                android:theme="@style/ButtonLayoutAppearance" />
+
+            <Button
+                android:id="@+id/del"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Delete"
+                android:textColor="@color/colorAccent" />
+
+        </TableRow>
+
+    </LinearLayout>
+
+</TableRow>

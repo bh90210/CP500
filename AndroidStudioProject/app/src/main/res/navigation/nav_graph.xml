@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/scrollingActivity">
+
+    <activity
+        android:id="@+id/scrollingActivity"
+        android:name="com.bh90210.cp500.ScrollingActivity"
+        android:label="activity_scrolling"
+        tools:layout="@layout/activity_scrolling" />
+    <action
+        android:id="@+id/action_blankFragment_to_blankFragment2"
+        app:destination="@id/photoPost" />
+    <activity
+        android:id="@+id/photoPost"
+        android:name="com.bh90210.cp500.photoPost"
+        android:label="activity_photo_post"
+        tools:layout="@layout/activity_photo_post" />
+    <fragment android:id="@+id/placeholder" />
+</navigation>
