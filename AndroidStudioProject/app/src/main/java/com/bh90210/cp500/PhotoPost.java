@@ -1,5 +1,6 @@
 package com.bh90210.cp500;
 
+import android.annotation.TargetApi;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -235,16 +236,28 @@ public class PhotoPost extends AppCompatActivity {
 
                         TimePickerDialog mTimePicker;
                         mTimePicker = new TimePickerDialog(PhotoPost.this, new TimePickerDialog.OnTimeSetListener() {
+                            @TargetApi(Build.VERSION_CODES.N)
                             @RequiresApi(api = Build.VERSION_CODES.M)
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 // logic
-                                TextInputEditText text = (TextInputEditText)findViewById(R.id.text);
-                                TextInputEditText twHash = (TextInputEditText)findViewById(R.id.twHash);
-                                TextInputEditText inHash = (TextInputEditText)findViewById(R.id.inHash);
+                                TextInputEditText text = findViewById(R.id.text);
+                                TextInputEditText twHash = findViewById(R.id.twHash);
+                                TextInputEditText inHash = findViewById(R.id.inHash);
                                 final String id = Cpfiveoo.schedule(String.valueOf(text.getText()), String.valueOf(twHash.getText()), String.valueOf(inHash.getText()), filePathHelper);
 
-                                Util.scheduleJob(getApplicationContext(), 60000, id);
+                                //make calendar to mili
+                                Calendar calendar = Calendar.getInstance();
+                                long that = System.currentTimeMillis();
+                                calendar.set(Calendar.HOUR, selectedHour);
+                                calendar.set(Calendar.MINUTE, selectedMinute);
+                                if (calendar.getTimeInMillis() <= that) {
+                                    calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH + 1));
+                                }
+                                long thiss = calendar.getTimeInMillis();
+                                long mili = thiss - that;
+
+                                Util.scheduleJob(getApplicationContext(), mili, id);
 
                                 Intent intent = new Intent(PhotoPost.this, ScrollingActivity.class);
                                 //intent.putExtra("alarm", id);

@@ -22,7 +22,7 @@ var totalIdz = make(map[int]string)
 var db *badger.DB
 var dbOpenHelper string
 
-// InitOpenDB open the database
+// InitDBdirHelper open the database
 func InitDBdirHelper(dir string) {
 	dbOpenHelper = dir
 }
@@ -196,6 +196,18 @@ func DeletePost(receivedID string) {
 		txn.Delete([]byte(receivedID + "_FB"))
 		txn.Delete([]byte(receivedID + "_TW"))
 		txn.Delete([]byte(receivedID + "_IN"))
+		return nil
+	})
+}
+
+// DelHelper Package sort provides primitives for sorting slices and user-defined
+// collections.
+func DelHelper(receivedID string) {
+	openDB()
+	defer db.Close()
+
+	db.Update(func(txn *badger.Txn) error {
+		txn.Delete([]byte(receivedID))
 		return nil
 	})
 }

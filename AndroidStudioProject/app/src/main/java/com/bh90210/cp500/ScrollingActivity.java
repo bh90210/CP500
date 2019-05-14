@@ -3,13 +3,17 @@ package com.bh90210.cp500;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.job.JobScheduler;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Messenger;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.MenuItem;
@@ -23,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -41,9 +46,12 @@ public class ScrollingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
+
         Cpfiveoo.initDBdirHelper(String.valueOf(context.getFilesDir())); // init the database passing the db dir
+
         createNotificationChannel();
+
         try {
             File file = new File(context.getFilesDir(), "MANIFEST");
             if (!file.exists()) {
@@ -83,7 +91,6 @@ public class ScrollingActivity extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.
                 LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         setContentView(R.layout.activity_scrolling);
 
         setTitle("");
@@ -146,21 +153,19 @@ public class ScrollingActivity extends AppCompatActivity {
             schePre.setImageBitmap(myBitmap);
 
             final View rowID = row.findViewById(R.id.tableraw);
+            //Cpfiveoo.dbUpdate("ROW_ID_HELPER_"+id, String.valueOf(rowID));
+
             final Button pm = row.findViewById(R.id.pn);
             pm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Cpfiveoo.scheduledPostNow(id);
-                            // send notification when done
-                            showNotification();
-                        }
-                    }).start();
-
                     // delete job
-
+                    String idToInt = Cpfiveoo.dbView(String.format("%s_HELPER", id));
+                    int idtodel = Integer.parseInt(idToInt);
+                    JobScheduler scheduler = (JobScheduler) context.getSystemService( Context.JOB_SCHEDULER_SERVICE ) ;
+                    scheduler.cancel(idtodel);
+                    // delete db helpers
+                    Cpfiveoo.delHelper(String.format("%s_HELPER", id));
                     // draw snackbar
                     View snackk = findViewById(R.id.app_bar);
                     final Snackbar snackbar = Snackbar.make(snackk, "Uploading", Snackbar.LENGTH_LONG);
@@ -169,6 +174,15 @@ public class ScrollingActivity extends AppCompatActivity {
                     snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     // remove row
                     ll.removeView(rowID);
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Cpfiveoo.scheduledPostNow(id);
+                            // send notification when done
+                            showNotification();
+                        }
+                    }).start();
                 }
             });
 
@@ -180,7 +194,12 @@ public class ScrollingActivity extends AppCompatActivity {
                     // delete db entry
                     Cpfiveoo.deletePost(id);
                     // delete job
-
+                    String idToInt = Cpfiveoo.dbView(String.format("%s_HELPER", id));
+                    int idtodel = Integer.parseInt(idToInt);
+                    JobScheduler scheduler = (JobScheduler) context.getSystemService( Context.JOB_SCHEDULER_SERVICE ) ;
+                    scheduler.cancel(idtodel);
+                    // delete db helpers
+                    Cpfiveoo.delHelper(String.format("%s_HELPER", id));
                     // draw snackbar
                     View snackk = findViewById(R.id.app_bar);
                     final Snackbar snackbar = Snackbar.make(snackk, "Deleted", Snackbar.LENGTH_LONG);
@@ -249,4 +268,15 @@ public class ScrollingActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+    //@Override
+    /*public void updateClient(String id) {
+        String dbReslt = Cpfiveoo.dbView("ROW_ID_HELPER_"+id);
+        int rowID = Integer.parseInt(dbReslt);
+        //View rowID = Cpfiveoo.dbView("ROW_ID_HELPER_"+id);
+        final TableLayout ll = findViewById(R.id.scheduled_posts);
+        final View row = findViewById(rowID);
+        ll.removeView(row);
+        Cpfiveoo.delHelper("ROW_ID_HELPER_"+id);
+    }*/
 }
