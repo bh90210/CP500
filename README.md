@@ -8,7 +8,7 @@ Currently in hard alpha, use at your own risk!
 There are two ways acquiring the app. You can either **A** download a pre-built APK or **B** build from source localy.  
 NOTICE: for option **B**2 to work you will need Go. For platform specific instructions please see [the official documentation](https://golang.org/doc/install) 
 
-* **A** You can download the latest release here
+* **A** You can download the latest release [here](https://github.com/BH90210/CP500/releases)
   
 * **B** There are two options to procced depending on your situation
 
