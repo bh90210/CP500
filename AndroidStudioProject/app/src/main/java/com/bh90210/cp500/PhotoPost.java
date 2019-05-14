@@ -248,21 +248,19 @@ public class PhotoPost extends AppCompatActivity {
 
                                 //make calendar to mili
                                 Calendar calendar = Calendar.getInstance();
-                                long that = System.currentTimeMillis();
-                                calendar.set(Calendar.HOUR, selectedHour);
+                                Calendar that = Calendar.getInstance();
+                                calendar.set(Calendar.HOUR_OF_DAY, selectedHour);
                                 calendar.set(Calendar.MINUTE, selectedMinute);
-                                if (calendar.getTimeInMillis() <= that) {
+                                if (calendar.getTimeInMillis() <= that.getTimeInMillis()) {
                                     calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH + 1));
                                 }
                                 long thiss = calendar.getTimeInMillis();
-                                long mili = thiss - that;
+                                long mili = thiss - that.getTimeInMillis();
 
                                 Util.scheduleJob(getApplicationContext(), mili, id);
+                                Cpfiveoo.dbUpdate("TIMER_HELPER_"+id, String.valueOf(thiss));
 
                                 Intent intent = new Intent(PhotoPost.this, ScrollingActivity.class);
-                                //intent.putExtra("alarm", id);
-                                //intent.putExtra("hour", String.valueOf(selectedHour));
-                                //intent.putExtra("minute", String.valueOf(selectedHour));
                                 startActivity(intent);
                             }
                         }, hour, minute, true);//Yes 24 hour time

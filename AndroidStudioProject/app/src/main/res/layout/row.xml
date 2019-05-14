@@ -25,11 +25,10 @@
                 android:scaleType="fitCenter" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/timeLeft"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
-                android:text="5.64h"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"

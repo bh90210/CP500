@@ -12,8 +12,6 @@ import androidx.annotation.RequiresApi;
 
 import cpfiveoo.Cpfiveoo;
 
-import static cpfiveoo.Cpfiveoo.dbView;
-
 public class Util {
     // schedule the start of the service every 10 - 30 seconds
     @RequiresApi(api = Build.VERSION_CODES.M)

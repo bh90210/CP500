@@ -4,16 +4,14 @@ import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.job.JobScheduler;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Messenger;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.MenuItem;
@@ -21,13 +19,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -133,11 +131,6 @@ public class ScrollingActivity extends AppCompatActivity {
         int totalPosts = (int) Cpfiveoo.totalScheduledPosts();
         final TableLayout ll = findViewById(R.id.scheduled_posts);
 
-        //Intent intent = getIntent();
-        //String ison = intent.getStringExtra("alarm");
-        //String hour = intent.getStringExtra("hour");
-        //String minute = intent.getStringExtra("minute");
-
         for(int i = 0; i < totalPosts; i ++) {
 
             final String id = Cpfiveoo.scheduledIds(i);
@@ -155,6 +148,24 @@ public class ScrollingActivity extends AppCompatActivity {
             final View rowID = row.findViewById(R.id.tableraw);
             //Cpfiveoo.dbUpdate("ROW_ID_HELPER_"+id, String.valueOf(rowID));
 
+            final TextView timeLeft = row.findViewById(R.id.timeLeft);
+            String strtoint = Cpfiveoo.dbView("TIMER_HELPER_"+id);
+            final long scheduledTimeInMili = Long.parseLong(strtoint);
+            final long now = System.currentTimeMillis();
+            final long timeleft = scheduledTimeInMili - now;
+            final CountDownTimer countDownTimer = new CountDownTimer(timeleft, 60000) {
+                public void onTick(long scheinmil) {
+                    long timeinseconds = scheinmil/1000;
+                    long timeinminutes = timeinseconds/60;
+                    timeLeft.setText(String.valueOf(timeinminutes));
+                }
+
+                public void onFinish() {
+                    Cpfiveoo.delHelper("TIMER_HELPER_"+id);
+                    ll.removeView(rowID);
+                }
+            }.start();
+
             final Button pm = row.findViewById(R.id.pn);
             pm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -166,6 +177,7 @@ public class ScrollingActivity extends AppCompatActivity {
                     scheduler.cancel(idtodel);
                     // delete db helpers
                     Cpfiveoo.delHelper(String.format("%s_HELPER", id));
+                    Cpfiveoo.delHelper("TIMER_HELPER_"+id);
                     // draw snackbar
                     View snackk = findViewById(R.id.app_bar);
                     final Snackbar snackbar = Snackbar.make(snackk, "Uploading", Snackbar.LENGTH_LONG);
@@ -174,6 +186,8 @@ public class ScrollingActivity extends AppCompatActivity {
                     snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     // remove row
                     ll.removeView(rowID);
+                    // cancel timer
+                    countDownTimer.cancel();
 
                     new Thread(new Runnable() {
                         @Override
@@ -200,6 +214,7 @@ public class ScrollingActivity extends AppCompatActivity {
                     scheduler.cancel(idtodel);
                     // delete db helpers
                     Cpfiveoo.delHelper(String.format("%s_HELPER", id));
+                    Cpfiveoo.delHelper("TIMER_HELPER_"+id);
                     // draw snackbar
                     View snackk = findViewById(R.id.app_bar);
                     final Snackbar snackbar = Snackbar.make(snackk, "Deleted", Snackbar.LENGTH_LONG);
@@ -208,22 +223,12 @@ public class ScrollingActivity extends AppCompatActivity {
                     snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     // remove row
                     ll.removeView(rowID);
+                    // calncel timer
+                    countDownTimer.cancel();
                 }
             });
         }
     }
-
-    //@Override
-    //public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_scrolling, menu);
-        //return true;
-    //}
-
-    //public void goToSettings() {
-    //    Intent intent = new Intent(this, Settings.class);
-    //    startActivity(intent);
-    //}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
