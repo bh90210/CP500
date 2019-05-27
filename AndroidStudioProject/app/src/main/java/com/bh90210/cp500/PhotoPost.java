@@ -33,6 +33,8 @@ import java.util.Objects;
 
 import cpfiveoo.Cpfiveoo;
 
+import static java.lang.Thread.sleep;
+
 public class PhotoPost extends AppCompatActivity {
     String filePathHelper;
 
@@ -301,6 +303,11 @@ public class PhotoPost extends AppCompatActivity {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
+                                try {
+                                    sleep(500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 Cpfiveoo.postNow(String.valueOf(text.getText()), String.valueOf(twHash.getText()), String.valueOf(inHash.getText()), filePathHelper);
                                 showNotification();
                             }
