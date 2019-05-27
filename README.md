@@ -3,7 +3,7 @@ Social media automation app for Android
 
 ![demo](https://media.giphy.com/media/dYy4hNwcQciByQnBz6/giphy.gif "Working Alpha")
 
-Currently in hard alpha, use at your own risk!
+Currently in hard beta, use at your own risk!
 
 There are two ways acquiring the app. You can either **A** download a pre-built APK or **B** build from source localy.  
 NOTICE: for option **B**2 to work you will need Go. For platform specific instructions please see [the official documentation](https://golang.org/doc/install) 
