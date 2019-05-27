@@ -25,8 +25,8 @@
                 android:scaleType="fitCenter" />
 
             <TextView
-                android:id="@+id/timeLeft"
-                android:layout_width="80dp"
+                android:id="@+id/timeLeftHours"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
                 android:textAlignment="center"
@@ -34,6 +34,37 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="normal|italic" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="normal|italic"
+                android:text="h"/>
+
+            <TextView
+                android:id="@+id/timeLeftMinutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="normal|italic" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="normal|italic"
+                android:text="m"/>
 
             <Button
                 android:id="@+id/pn"

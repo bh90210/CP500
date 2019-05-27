@@ -53,7 +53,9 @@
     <last-search-timestamp>1556160725748</last-search-timestamp>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2954e6b-6516-4bfc-bf56-ee71009a92a4" name="Default Changelist" comment="" />
+    <list default="true" id="d2954e6b-6516-4bfc-bf56-ee71009a92a4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/AndroidStudioProject/app/src/main/java/com/bh90210/cp500/PhotoPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/AndroidStudioProject/app/src/main/java/com/bh90210/cp500/PhotoPost.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +107,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AndroidStudioProjects/CP500/app/src/main/java/com/example/cp500/ScrollingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="1410">
               <caret line="123" column="55" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -261,6 +263,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,44 +274,7 @@
             <path>
               <item name="CP500" type="b2602c69:ProjectViewProjectNode" />
               <item name="CP500" type="462c0819:PsiDirectoryNode" />
-              <item name="AndroidStudioProject" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CP500" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CP500" type="462c0819:PsiDirectoryNode" />
-              <item name="AndroidStudioProject" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CP500" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CP500" type="462c0819:PsiDirectoryNode" />
-              <item name="AndroidStudioProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CP500" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CP500" type="462c0819:PsiDirectoryNode" />
-              <item name="AndroidStudioProject" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CP500" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CP500" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="CP500" type="58d84e3e:PackageViewProjectNode" />
-              <item name="app" type="616d4139:PackageViewModuleNode" />
             </path>
           </expand>
           <select />
@@ -495,10 +461,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="24" width="1284" height="778" extended-state="6" />
+    <frame x="-2" y="-2" width="1284" height="780" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" sideWeight="0.50609756" side_tool="true" weight="0.23344104" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49390244" visible="true" weight="0.26926133" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49390244" visible="true" weight="0.2688942" />
       <window_info id="Structure" order="2" sideWeight="0.50406504" side_tool="true" weight="0.23344104" />
       <window_info id="Favorites" order="3" sideWeight="0.50406504" side_tool="true" weight="0.23344104" />
       <window_info id="Build Variants" order="4" sideWeight="0.50406504" side_tool="true" weight="0.23344104" />
@@ -511,7 +477,7 @@
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32911393" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32911393" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32911393" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="5" sideWeight="0.5573506" side_tool="true" visible="true" weight="0.21974522" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5573506" side_tool="true" visible="true" weight="0.21955128" />
       <window_info anchor="bottom" id="Version Control" order="6" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.44264942" visible="true" weight="0.21974522" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
@@ -580,7 +546,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/cp500/PhotoPost.java" />
     <entry file="file://$USER_HOME$/AndroidStudioProjects/CP500/app/src/main/java/com/example/cp500/ScrollingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="1410">
           <caret line="123" column="55" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />

@@ -55,10 +55,10 @@ public class PhotoPost extends AppCompatActivity {
             }
         });
         String twHashValue = Cpfiveoo.dbView("twHash");
-        TextInputEditText twHash = (TextInputEditText)findViewById(R.id.twHash);
+        final TextInputEditText twHash = (TextInputEditText)findViewById(R.id.twHash);
         twHash.setText(twHashValue);
         String inHashValue = Cpfiveoo.dbView("inHash");
-        TextInputEditText inHash = (TextInputEditText)findViewById(R.id.inHash);
+        final TextInputEditText inHash = (TextInputEditText)findViewById(R.id.inHash);
         inHash.setText(inHashValue);
         final String fbCh = Cpfiveoo.dbView("fbCheckedMem");
         final CheckBox checkBoxfb = (CheckBox) findViewById(R.id.fbCheckButton);
@@ -292,21 +292,19 @@ public class PhotoPost extends AppCompatActivity {
                         View snackbarView = snackbar.getView();
                         snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     } else {
+                        Intent intent = new Intent(PhotoPost.this, ScrollingActivity.class);
+                        startActivity(intent);
+                        final TextInputEditText text = (TextInputEditText)findViewById(R.id.text);
+                        final TextInputEditText twHash = (TextInputEditText)findViewById(R.id.twHash);
+                        final TextInputEditText inHash = (TextInputEditText)findViewById(R.id.inHash);
+
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                TextInputEditText text = (TextInputEditText)findViewById(R.id.text);
-                                TextInputEditText twHash = (TextInputEditText)findViewById(R.id.twHash);
-                                TextInputEditText inHash = (TextInputEditText)findViewById(R.id.inHash);
                                 Cpfiveoo.postNow(String.valueOf(text.getText()), String.valueOf(twHash.getText()), String.valueOf(inHash.getText()), filePathHelper);
                                 showNotification();
                             }
                         }).start();
-
-                        Intent intent = new Intent(PhotoPost.this, ScrollingActivity.class);
-                        startActivity(intent);
-
-                        // draw waiting animation
                     }
                 }
             }

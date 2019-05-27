@@ -148,7 +148,8 @@ public class ScrollingActivity extends AppCompatActivity {
             final View rowID = row.findViewById(R.id.tableraw);
             //Cpfiveoo.dbUpdate("ROW_ID_HELPER_"+id, String.valueOf(rowID));
 
-            final TextView timeLeft = row.findViewById(R.id.timeLeft);
+            final TextView timeLeftHours = row.findViewById(R.id.timeLeftHours);
+            final TextView timeLeftMinutes = row.findViewById(R.id.timeLeftMinutes);
             String strtoint = Cpfiveoo.dbView("TIMER_HELPER_"+id);
             final long scheduledTimeInMili = Long.parseLong(strtoint);
             final long now = System.currentTimeMillis();
@@ -157,7 +158,10 @@ public class ScrollingActivity extends AppCompatActivity {
                 public void onTick(long scheinmil) {
                     long timeinseconds = scheinmil/1000;
                     long timeinminutes = timeinseconds/60;
-                    timeLeft.setText(String.valueOf(timeinminutes));
+                    long timeinhours = timeinminutes/60;
+                    long timeinminutesmodulo = timeinminutes%60;
+                    timeLeftHours.setText(String.valueOf(timeinhours));
+                    timeLeftMinutes.setText(String.valueOf(timeinminutesmodulo));
                 }
 
                 public void onFinish() {
